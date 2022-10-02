@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import {
   FormContainer,
-  Title,
+  LabelName,
   NameInput,
   Button,
 } from './PhonebookForm.styled';
@@ -39,7 +39,7 @@ class PhonebookForm extends Component {
     const { name, number } = this.state;
     return (
       <FormContainer onSubmit={this.handleSubmit}>
-        <Title>
+        <LabelName>
           Name
           <NameInput
             type="text"
@@ -50,8 +50,8 @@ class PhonebookForm extends Component {
             value={name}
             onChange={this.handleChange}
           />
-        </Title>
-        <Title>
+        </LabelName>
+        <LabelName>
           Number
           <NameInput
             type="tel"
@@ -62,7 +62,7 @@ class PhonebookForm extends Component {
             value={number}
             onChange={this.handleChange}
           />
-        </Title>
+        </LabelName>
         <Button type="submit">Add contact</Button>
       </FormContainer>
     );

@@ -7,7 +7,7 @@ export const FormContainer = styled.form`
   margin-bottom: 32px;
 `;
 
-export const Title = styled.label`
+export const LabelName = styled.label`
   display: block;
   font-size: 25px;
 
