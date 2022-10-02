@@ -26,7 +26,6 @@ export const NameInput = styled.input`
 export const Button = styled.button`
   display: block;
   padding: 4px;
-  background-color: transparent;
-  border-radius: 4px;
   margin-top: 32px;
+  cursor: pointer;
 `;

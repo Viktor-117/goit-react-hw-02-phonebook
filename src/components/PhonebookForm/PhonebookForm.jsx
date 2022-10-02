@@ -15,7 +15,6 @@ class PhonebookForm extends Component {
 
   handleChange = event => {
     const { name, value } = event.currentTarget;
-    console.log(value);
     this.setState({ [name]: value });
   };
 
