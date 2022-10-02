@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PhonebookForm from './PhonebookForm';
+import Section from 'components/Section';
+import ContactList from 'components/ContactList';
 
 class App extends Component {
   state = {
@@ -7,29 +9,38 @@ class App extends Component {
     name: '',
   };
 
-  handleChange = event => {
-    const { name, value } = this.currentTarget;
-    this.setState({ [name]: value });
+  formSubmitHandler = data => {
+    this.setState(prevState => {
+      return {
+        contacts: [...prevState.contacts, data],
+      };
+    });
   };
 
   render() {
-    const { contacts, name } = this.state;
+    const { contacts } = this.state;
     return (
       <div
         style={{
+          position: 'relative',
           height: '100vh',
-          display: 'flex',
+          width: 500,
+          left: 300,
+          marginTop: 50,
           justifyContent: 'center',
-          alignItems: 'center',
           fontSize: 40,
           color: '#010101',
         }}
       >
-        <PhonebookForm
-          contacts={contacts}
-          name={name}
-          onChange={this.handleChange}
-        ></PhonebookForm>
+        <Section title="Phonebook">
+          <PhonebookForm onSubmit={this.formSubmitHandler}></PhonebookForm>
+        </Section>
+
+        <Section title="Contacts">
+          {contacts.length > 0 && (
+            <ContactList contacts={contacts}></ContactList>
+          )}
+        </Section>
       </div>
     );
   }

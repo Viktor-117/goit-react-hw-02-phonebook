@@ -1,11 +1,32 @@
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 
-export const Container = styled.form`
-  width: 300px;
+export const FormContainer = styled.form`
+  width: 400px;
+  border: 1px solid #000;
+  padding: 20px;
+  margin-bottom: 32px;
 `;
 
-export const LabelName = styled.label``;
+export const Title = styled.label`
+  display: block;
+  font-size: 25px;
 
-export const NameInput = styled.input``;
+  :not(:first-of-type) {
+    margin-top: 20px;
+  }
+`;
 
-export const Button = styled.button``;
+export const NameInput = styled.input`
+  margin-top: 15px;
+  display: block;
+  font-size: 16px;
+  padding: 4px;
+`;
+
+export const Button = styled.button`
+  display: block;
+  padding: 4px;
+  background-color: transparent;
+  border-radius: 4px;
+  margin-top: 32px;
+`;
