@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PhonebookForm from './PhonebookForm';
-import Section from 'components/Section';
 import ContactList from 'components/ContactList';
 import Filter from 'components/Filter';
 
@@ -13,7 +12,6 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
   };
 
   handleChange = event => {
@@ -55,16 +53,18 @@ class App extends Component {
           color: '#010101',
         }}
       >
-        <Section title="Phonebook">
-          <PhonebookForm onSubmit={this.formSubmitHandler}></PhonebookForm>
-        </Section>
+        <h1 style={{ fontSize: 40, fontWeight: 700, marginBottom: 32 }}>
+          Phonebook
+        </h1>
+        <PhonebookForm onSubmit={this.formSubmitHandler}></PhonebookForm>
 
-        <Section title="Contacts">
-          <Filter filter={filter} onChange={this.handleChange}></Filter>
-          {contacts.length > 0 && (
-            <ContactList contacts={visibleContacts}></ContactList>
-          )}
-        </Section>
+        <h1 style={{ fontSize: 40, fontWeight: 700, marginBottom: 32 }}>
+          Contacts
+        </h1>
+        <Filter filter={filter} onChange={this.handleChange}></Filter>
+        {contacts.length > 0 && (
+          <ContactList contacts={visibleContacts}></ContactList>
+        )}
       </div>
     );
   }

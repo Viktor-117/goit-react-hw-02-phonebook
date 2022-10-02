@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
 import {
   FormContainer,
   LabelName,
@@ -22,6 +21,7 @@ class PhonebookForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    console.log(this.props);
 
     this.props.onSubmit({
       id: nanoid(),
@@ -70,5 +70,3 @@ class PhonebookForm extends Component {
 }
 
 export default PhonebookForm;
-
-// PhonebookForm.propTypes = { name: PropTypes.string.isRequired };
