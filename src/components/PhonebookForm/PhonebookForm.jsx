@@ -21,7 +21,6 @@ class PhonebookForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.props);
 
     this.props.onSubmit({
       id: nanoid(),

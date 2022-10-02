@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Notiflix from 'notiflix';
 import PhonebookForm from './PhonebookForm';
 import ContactList from 'components/ContactList';
 import Filter from 'components/Filter';
@@ -29,12 +30,21 @@ class App extends Component {
     );
   };
 
+  contactsNameCheck = name => {
+    const normalizedName = name.toLowerCase();
+    return this.state.contacts.find(contact =>
+      contact.name.toLowerCase().includes(normalizedName)
+    );
+  };
+
   formSubmitHandler = data => {
-    this.setState(prevState => {
-      return {
-        contacts: [...prevState.contacts, data],
-      };
-    });
+    this.contactsNameCheck(data.name)
+      ? Notiflix.Notify.failure(`${data.name} is already in contacts.`)
+      : this.setState(prevState => {
+          return {
+            contacts: [...prevState.contacts, data],
+          };
+        });
   };
 
   render() {
