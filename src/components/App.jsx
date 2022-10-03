@@ -3,6 +3,7 @@ import Notiflix from 'notiflix';
 import PhonebookForm from './PhonebookForm';
 import ContactList from 'components/ContactList';
 import Filter from 'components/Filter';
+import { Container, Title } from './App.styled';
 
 class App extends Component {
   state = {
@@ -55,7 +56,7 @@ class App extends Component {
     const { filter, contacts } = this.state;
     const visibleContacts = this.getVisibleContacts();
     return (
-      <div
+      <Container
         style={{
           position: 'relative',
           height: '100vh',
@@ -67,14 +68,10 @@ class App extends Component {
           color: '#010101',
         }}
       >
-        <h1 style={{ fontSize: 40, fontWeight: 700, marginBottom: 32 }}>
-          Phonebook
-        </h1>
+        <Title>Phonebook</Title>
         <PhonebookForm onSubmit={this.formSubmitHandler}></PhonebookForm>
 
-        <h1 style={{ fontSize: 40, fontWeight: 700, marginBottom: 32 }}>
-          Contacts
-        </h1>
+        <Title>Contacts</Title>
         <Filter filter={filter} onChange={this.handleChange}></Filter>
         {contacts.length > 0 && (
           <ContactList
@@ -82,7 +79,7 @@ class App extends Component {
             onDelete={this.deleteContact}
           ></ContactList>
         )}
-      </div>
+      </Container>
     );
   }
 }
