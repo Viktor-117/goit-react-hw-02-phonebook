@@ -1,42 +1,39 @@
-import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
+import { Formik } from 'formik';
+import * as yup from 'yup';
 import {
   FormContainer,
   LabelName,
   NameInput,
   Button,
+  Error,
 } from './PhonebookForm.styled';
 
-class PhonebookForm extends Component {
-  state = {
-    name: '',
-    number: '',
-  };
+let schema = yup.object().shape({
+  name: yup.string().required(),
+  number: yup.number().min(4).required(),
+});
 
-  handleChange = event => {
-    const { name, value } = event.currentTarget;
-    this.setState({ [name]: value });
-  };
+const PhonebookForm = ({ onSubmit }) => {
+  const handleSubmit = (values, { resetForm }) => {
+    console.log(values);
+    console.log(onSubmit);
 
-  handleSubmit = event => {
-    event.preventDefault();
-
-    this.props.onSubmit({
+    onSubmit({
       id: nanoid(),
-      name: this.state.name,
-      number: this.state.number,
+      name: values.name,
+      number: values.number,
     });
-    this.reset();
+    resetForm();
   };
 
-  reset = () => {
-    this.setState({ name: '', number: '' });
-  };
-
-  render() {
-    const { name, number } = this.state;
-    return (
-      <FormContainer onSubmit={this.handleSubmit}>
+  return (
+    <Formik
+      initialValues={{ name: '', number: '' }}
+      onSubmit={handleSubmit}
+      validationSchema={schema}
+    >
+      <FormContainer autoComplete="off">
         <LabelName>
           Name
           <NameInput
@@ -45,9 +42,8 @@ class PhonebookForm extends Component {
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
-            value={name}
-            onChange={this.handleChange}
           />
+          <Error name="name" component="div" />
         </LabelName>
         <LabelName>
           Number
@@ -57,14 +53,13 @@ class PhonebookForm extends Component {
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            value={number}
-            onChange={this.handleChange}
           />
+          <Error name="number" component="div" />
         </LabelName>
         <Button type="submit">Add contact</Button>
       </FormContainer>
-    );
-  }
-}
+    </Formik>
+  );
+};
 
 export default PhonebookForm;
